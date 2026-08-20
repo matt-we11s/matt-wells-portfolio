@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matthew S. Wells — Instructional Design &amp; L&amp;D</title>
+    <meta
+      name="description"
+      content="Matthew S. Wells designs L&amp;D systems: templates, processes, and AI-assisted production pipelines across higher education and enterprise SaaS."
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;1,9..144,400&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body data-theme="dark" data-persona="exec">
+    <div class="progress" aria-hidden="true">
+      <div class="progress__fill" id="progress-fill"></div>
+    </div>
+
+    <header class="nav">
+      <a class="nav__brand" href="#top">
+        <span class="nav__mark" aria-hidden="true"></span>
+        Matthew S. Wells
+      </a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav__tools">
+        <button type="button" class="icon-btn" id="badge-toggle" aria-label="Achievements">
+          <span id="badge-count">0/8</span>
+        </button>
+        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle light and dark">
+          Theme
+        </button>
+      </div>
+    </header>
+
+    <ol class="badge-rail" id="badge-rail"></ol>
+
+    <div class="toast" id="toast" hidden>
+      <p>Unlocked</p>
+      <strong id="toast-name"></strong>
+    </div>
+
+    <main id="top">
+      <section class="hero" id="about">
+        <div class="hero__glow" aria-hidden="true"></div>
+        <p class="eyebrow" data-copy="eyebrow">Instructional Design · L&amp;D systems · Missouri</p>
+        <h1>
+          Matthew S. Wells
+          <em data-copy="headline">I design the systems that let learning scale.</em>
+        </h1>
+        <p class="lede" data-copy="about">
+          Twelve years building L&amp;D operations across higher education and B2B SaaS.
+        </p>
+        <p class="fine" data-copy="lede"></p>
+
+        <ul class="metrics" id="metrics"></ul>
+
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="./resume.html" data-packet>Resume</a>
+          <a class="btn" href="./executive-summary.html" data-packet>Executive summary</a>
+          <a class="btn" href="mailto:matthewschoolerwells@gmail.com" data-email data-keep-label>Email me</a>
+        </div>
+
+        <div class="personas" role="group" aria-label="Choose how you want to read this page">
+          <p class="personas__label">Read this as</p>
+          <div class="personas__row">
+            <button type="button" data-persona="exec" aria-pressed="true">
+              Busy Executive / Recruiter
+            </button>
+            <button type="button" data-persona="design" aria-pressed="false">Design Lead</button>
+            <button type="button" data-persona="explorer" aria-pressed="false">Curious Explorer</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="section__head">
+          <p class="eyebrow">02 — Experience</p>
+          <h2>Where the work has lived.</h2>
+        </div>
+        <ol class="timeline" id="timeline"></ol>
+        <div class="split">
+          <div>
+            <h3 class="mini">Education</h3>
+            <ul class="plain" id="education"></ul>
+          </div>
+          <div>
+            <h3 class="mini">Certifications</h3>
+            <ul class="chips" id="certs"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--work" id="work">
+        <div class="section__head">
+          <p class="eyebrow">03 — Selected work</p>
+          <h2 data-copy="workIntro">Four pieces of work. Each one is a system other people could keep using.</h2>
+        </div>
+
+        <div class="work-grid">
+          <div class="cone-panel">
+            <div class="cone-wrap">
+              <canvas id="cone" width="880" height="1040" aria-hidden="true"></canvas>
+              <p class="cone-status" id="cone-status">All skills</p>
+            </div>
+            <div class="cone-legend">
+              <span><i class="dot dot--blue"></i>Foundational</span>
+              <span><i class="dot dot--violet"></i>Instructional</span>
+              <span><i class="dot dot--magenta"></i>Executive / AI</span>
+              <button type="button" class="text-btn" id="cone-reset">Show all skills</button>
+            </div>
+            <details class="skill-fallback">
+              <summary>All skills as a list</summary>
+              <ul id="skill-list"></ul>
+            </details>
+          </div>
+          <div class="case-list" id="case-list"></div>
+        </div>
+      </section>
+
+      <section class="section section--close" id="contact">
+        <div class="section__head">
+          <p class="eyebrow">04 — Close</p>
+          <h2>Let’s talk about better learning.</h2>
+          <p class="lede" data-copy="close">
+            Open to remote instructional design and L&amp;D leadership roles.
+          </p>
+        </div>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="mailto:matthewschoolerwells@gmail.com" data-email>matthewschoolerwells@gmail.com</a>
+          <a class="btn" href="./resume.html" data-packet>Download resume</a>
+          <a class="btn" href="./executive-summary.html" data-packet>Executive summary</a>
+        </div>
+        <p class="fineprint">Missouri · © <span id="year">2026</span> Matthew S. Wells</p>
+      </section>
+    </main>
+
+    <div class="overlay" id="case-overlay" hidden>
+      <div class="overlay__scrim" data-close-case></div>
+      <article class="overlay__panel" id="case-dialog" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="case-title">
+        <button type="button" class="overlay__close" data-close-case aria-label="Close case">Close</button>
+        <div class="overlay__top">
+          <span data-field="number">01</span>
+          <span class="case-card__tag" data-field="tag"></span>
+        </div>
+        <h2 id="case-title" data-field="title"></h2>
+        <p class="case-card__meta" data-field="meta"></p>
+        <div class="overlay__figure" data-field="figure"></div>
+        <h3>The problem</h3>
+        <p data-field="summary"></p>
+        <h3>The approach</h3>
+        <p data-field="approach"></p>
+        <h3>What changed</h3>
+        <ul class="outcomes" data-field="outcomes"></ul>
+        <p class="overlay__close-line" data-field="close"></p>
+      </article>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
