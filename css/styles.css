@@ -13,7 +13,7 @@
   --muted: var(--text-muted);
   --line: var(--border-subtle);
   --card: color-mix(in srgb, var(--bg-surface) 88%, transparent);
-  --serif: "Fraunces", "Times New Roman", serif;
+  --serif: "EB Garamond", "Fraunces", "Times New Roman", serif;
   --sans: "Outfit", "Segoe UI", sans-serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
