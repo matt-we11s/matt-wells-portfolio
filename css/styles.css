@@ -410,6 +410,29 @@ body[data-persona="exec"] .metrics em {
   border-radius: 14px;
   border: 1px solid var(--line);
   background: var(--card);
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.personas__row button:hover,
+.personas__row button:focus-visible {
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.personas__row button[data-persona="exec"]:hover,
+.personas__row button[data-persona="exec"]:focus-visible {
+  border-color: color-mix(in srgb, var(--accent-blue) 70%, var(--line));
+}
+
+.personas__row button[data-persona="design"]:hover,
+.personas__row button[data-persona="design"]:focus-visible {
+  border-color: color-mix(in srgb, var(--accent-amber) 70%, var(--line));
+}
+
+.personas__row button[data-persona="explorer"]:hover,
+.personas__row button[data-persona="explorer"]:focus-visible {
+  border-color: color-mix(in srgb, var(--accent-teal) 70%, var(--line));
 }
 
 .personas__row button small {
@@ -921,6 +944,7 @@ body[data-theme="light"] .cone-wrap {
 
   .case-card,
   .job-card,
+  .personas__row button,
   .toast,
   .overlay {
     transition: none;
