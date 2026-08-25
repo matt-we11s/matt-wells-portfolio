@@ -356,6 +356,10 @@ export const CASES = [
       "Articulate Storyline",
     ],
     figure: "ai",
+    video: {
+      id: "qS5wFB8ghAU",
+      title: "AI scriptwriting and voiceovers",
+    },
   },
   {
     id: "dtu",
