@@ -539,6 +539,10 @@ export const CASES = [
       "Instructional Design",
     ],
     figure: "cleveland",
+    video: {
+      id: "y1JLi1DdJZ4",
+      title: "Cleveland University distance education during COVID",
+    },
   },
 ];
 

@@ -849,6 +849,26 @@ body[data-theme="light"] .overlay__panel {
   margin: 1rem 0 0.4rem;
 }
 
+.overlay__video {
+  margin-top: 1.5rem;
+}
+
+.overlay__video .figure__kicker {
+  text-align: center;
+}
+
+.overlay__video iframe {
+  display: block;
+  width: min(280px, 100%);
+  aspect-ratio: 9 / 16;
+  height: auto;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 12px;
+  background: #090d16;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
 .figure {
   margin: 0;
   padding: 0;

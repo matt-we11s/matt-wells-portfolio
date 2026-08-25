@@ -59,6 +59,7 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     outcomes: root.querySelector("[data-field=outcomes]"),
     close: root.querySelector("[data-field=close]"),
     figure: root.querySelector("[data-field=figure]"),
+    video: root.querySelector("[data-field=video]"),
     overview: root.querySelector("[data-field=overview]"),
     duties: root.querySelector("[data-field=duties]"),
     accomplishments: root.querySelector("[data-field=accomplishments]"),
@@ -101,8 +102,35 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     fields.close.textContent = pick(data, "close");
     fillList(fields.outcomes, pick(data, "outcomes"));
     fields.figure.innerHTML = FIGURES[data.figure] || "";
+    fillVideo(data.video);
     if (caseBlock) caseBlock.hidden = false;
     if (jobBlock) jobBlock.hidden = true;
+  }
+
+  function fillVideo(video) {
+    if (!fields.video) return;
+    if (!video?.id) {
+      fields.video.hidden = true;
+      fields.video.replaceChildren();
+      return;
+    }
+    const title = video.title || "Case video";
+    fields.video.hidden = false;
+    fields.video.innerHTML = `
+      <p class="figure__kicker">Video</p>
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/${video.id}"
+        title="${title}"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>`;
+  }
+
+  function clearVideo() {
+    if (!fields.video) return;
+    fields.video.hidden = true;
+    fields.video.replaceChildren();
   }
 
   function fillJob(data) {
@@ -123,6 +151,7 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
         }),
       );
     }
+    clearVideo();
     if (caseBlock) caseBlock.hidden = true;
     if (jobBlock) jobBlock.hidden = false;
   }
@@ -166,6 +195,7 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     clearTimeout(readTimer);
     root.classList.remove("is-open");
     document.body.classList.remove("is-cased");
+    clearVideo();
     cone?.reset();
     window.setTimeout(() => {
       root.hidden = true;
