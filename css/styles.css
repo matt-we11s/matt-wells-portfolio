@@ -500,12 +500,6 @@ body[data-persona="exec"] .metrics em {
   margin: 0.35rem 0 0;
 }
 
-.job-card .text-btn {
-  grid-column: 2;
-  justify-self: start;
-  margin-top: 0.55rem;
-}
-
 .split {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -911,8 +905,7 @@ body[data-theme="light"] .cone-wrap {
 
   .timeline li h3,
   .timeline .org,
-  .timeline .job-copy,
-  .job-card .text-btn {
+  .timeline .job-copy {
     grid-column: 1;
   }
 

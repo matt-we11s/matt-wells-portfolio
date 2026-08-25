@@ -55,8 +55,7 @@ function renderExperience() {
         <p class="when">${job.dates}</p>
         <h3>${job.role}</h3>
         <p class="org">${job.org} · ${job.where}</p>
-        <p class="job-copy" data-job="${job.org}"></p>
-        <span class="text-btn" aria-hidden="true">Open role</span>`;
+        <p class="job-copy" data-job="${job.org}"></p>`;
       return li;
     }),
   );
