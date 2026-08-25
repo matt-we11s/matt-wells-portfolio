@@ -1,4 +1,4 @@
-import { CASES } from "./content.js";
+import { CASES, EXPERIENCE } from "./content.js";
 
 const FIGURES = {
   ai: `
@@ -59,9 +59,16 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     outcomes: root.querySelector("[data-field=outcomes]"),
     close: root.querySelector("[data-field=close]"),
     figure: root.querySelector("[data-field=figure]"),
+    overview: root.querySelector("[data-field=overview]"),
+    duties: root.querySelector("[data-field=duties]"),
+    accomplishments: root.querySelector("[data-field=accomplishments]"),
+    jobSkills: root.querySelector("[data-field=job-skills]"),
   };
+  const caseBlock = root.querySelector("[data-mode=case]");
+  const jobBlock = root.querySelector("[data-mode=job]");
 
   let openId = null;
+  let openKind = null;
   let lastFocus = null;
   let readTimer = 0;
 
@@ -72,7 +79,18 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     return value[persona] || value.explorer || value.exec;
   }
 
-  function fill(data) {
+  function fillList(el, items) {
+    if (!el) return;
+    el.replaceChildren(
+      ...(items || []).map((line) => {
+        const li = document.createElement("li");
+        li.textContent = line;
+        return li;
+      }),
+    );
+  }
+
+  function fillCase(data) {
     root.style.setProperty("--case", data.color);
     fields.number.textContent = data.number;
     fields.tag.textContent = data.tag;
@@ -81,37 +99,70 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     fields.summary.textContent = pick(data, "summary");
     fields.approach.textContent = pick(data, "approach");
     fields.close.textContent = pick(data, "close");
-    const outcomes = pick(data, "outcomes");
-    fields.outcomes.replaceChildren(
-      ...outcomes.map((line) => {
-        const li = document.createElement("li");
-        li.textContent = line;
-        return li;
-      }),
-    );
+    fillList(fields.outcomes, pick(data, "outcomes"));
     fields.figure.innerHTML = FIGURES[data.figure] || "";
+    if (caseBlock) caseBlock.hidden = false;
+    if (jobBlock) jobBlock.hidden = true;
   }
 
-  function open(id, card) {
-    const data = CASES.find((item) => item.id === id);
-    if (!data) return;
+  function fillJob(data) {
+    root.style.setProperty("--case", data.color);
+    fields.number.textContent = data.dates;
+    fields.tag.textContent = data.tag;
+    fields.title.textContent = data.role;
+    fields.meta.textContent = `${data.org} · ${data.where}`;
+    if (fields.overview) fields.overview.textContent = pick(data, "overview");
+    fillList(fields.duties, data.duties);
+    fillList(fields.accomplishments, data.accomplishments);
+    if (fields.jobSkills) {
+      fields.jobSkills.replaceChildren(
+        ...data.skills.map((name) => {
+          const li = document.createElement("li");
+          li.textContent = name;
+          return li;
+        }),
+      );
+    }
+    if (caseBlock) caseBlock.hidden = true;
+    if (jobBlock) jobBlock.hidden = false;
+  }
+
+  function show(card) {
     lastFocus = card || document.activeElement;
-    fill(data);
-    openId = id;
     root.hidden = false;
     document.body.classList.add("is-cased");
     dialog.scrollTop = 0;
     requestAnimationFrame(() => root.classList.add("is-open"));
     dialog.focus();
+    clearTimeout(readTimer);
+    readTimer = window.setTimeout(() => onRead?.(openId), 6500);
+  }
+
+  function open(id, card) {
+    const data = CASES.find((item) => item.id === id);
+    if (!data) return;
+    openId = id;
+    openKind = "case";
+    fillCase(data);
+    show(card);
     cone?.filter(data.skills, `Skills in ${data.title}`);
     onOpen?.(id);
-    clearTimeout(readTimer);
-    readTimer = window.setTimeout(() => onRead?.(id), 6500);
+  }
+
+  function openJob(id, card) {
+    const data = EXPERIENCE.find((item) => item.id === id);
+    if (!data) return;
+    openId = id;
+    openKind = "job";
+    fillJob(data);
+    show(card);
+    cone?.filter(data.skills, `Skills at ${data.org}`);
   }
 
   function close() {
     if (!openId) return;
     openId = null;
+    openKind = null;
     clearTimeout(readTimer);
     root.classList.remove("is-open");
     document.body.classList.remove("is-cased");
@@ -140,6 +191,28 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     });
   });
 
+  document.querySelectorAll("[data-job-id]").forEach((card) => {
+    const id = card.dataset.jobId;
+    const data = EXPERIENCE.find((item) => item.id === id);
+    if (!data) return;
+
+    card.addEventListener("mouseenter", () => cone?.highlight(data.skills));
+    card.addEventListener("mouseleave", () => cone?.clearHighlight());
+    card.addEventListener("focus", () => cone?.highlight(data.skills));
+    card.addEventListener("blur", () => cone?.clearHighlight());
+
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
+      openJob(id, card);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openJob(id, card);
+      }
+    });
+  });
+
   root.querySelectorAll("[data-close-case]").forEach((btn) => {
     btn.addEventListener("click", close);
   });
@@ -147,5 +220,5 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     if (e.key === "Escape" && openId) close();
   });
 
-  return { open, close };
+  return { open, openJob, close };
 }

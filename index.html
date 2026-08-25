@@ -165,14 +165,26 @@
         </div>
         <h2 id="case-title" data-field="title"></h2>
         <p class="case-card__meta" data-field="meta"></p>
-        <div class="overlay__figure" data-field="figure"></div>
-        <h3>The problem</h3>
-        <p data-field="summary"></p>
-        <h3>The approach</h3>
-        <p data-field="approach"></p>
-        <h3>What changed</h3>
-        <ul class="outcomes" data-field="outcomes"></ul>
-        <p class="overlay__close-line" data-field="close"></p>
+        <div data-mode="case">
+          <div class="overlay__figure" data-field="figure"></div>
+          <h3>The problem</h3>
+          <p data-field="summary"></p>
+          <h3>The approach</h3>
+          <p data-field="approach"></p>
+          <h3>What changed</h3>
+          <ul class="outcomes" data-field="outcomes"></ul>
+          <p class="overlay__close-line" data-field="close"></p>
+        </div>
+        <div data-mode="job" hidden>
+          <h3>The role</h3>
+          <p data-field="overview"></p>
+          <h3>Job duties</h3>
+          <ul class="outcomes" data-field="duties"></ul>
+          <h3>Accomplishments</h3>
+          <ul class="outcomes" data-field="accomplishments"></ul>
+          <h3>Relevant skills</h3>
+          <ul class="chips overlay__skills" data-field="job-skills"></ul>
+        </div>
       </article>
     </div>
 

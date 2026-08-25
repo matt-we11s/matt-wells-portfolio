@@ -468,6 +468,18 @@ body[data-persona="exec"] .metrics em {
   background: var(--card);
 }
 
+.job-card {
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.job-card:hover,
+.job-card:focus-visible {
+  border-color: color-mix(in srgb, var(--case, var(--accent-blue)) 70%, var(--line));
+  transform: translateY(-1px);
+  outline: none;
+}
+
 .timeline .when,
 .org {
   margin: 0;
@@ -486,6 +498,12 @@ body[data-persona="exec"] .metrics em {
 
 .job-copy {
   margin: 0.35rem 0 0;
+}
+
+.job-card .text-btn {
+  grid-column: 2;
+  justify-self: start;
+  margin-top: 0.55rem;
 }
 
 .split {
@@ -767,6 +785,14 @@ body[data-theme="light"] .cone-wrap {
   font-size: 1.15rem;
 }
 
+.overlay__skills {
+  margin-top: 0.35rem;
+}
+
+.overlay__skills li {
+  color: var(--ink);
+}
+
 .overlay__figure {
   margin: 1rem 0 0.4rem;
 }
@@ -868,7 +894,8 @@ body[data-theme="light"] .cone-wrap {
 
   .timeline li h3,
   .timeline .org,
-  .timeline .job-copy {
+  .timeline .job-copy,
+  .job-card .text-btn {
     grid-column: 1;
   }
 
@@ -883,6 +910,7 @@ body[data-theme="light"] .cone-wrap {
   }
 
   .case-card,
+  .job-card,
   .toast,
   .overlay {
     transition: none;

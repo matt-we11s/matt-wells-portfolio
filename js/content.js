@@ -72,48 +72,199 @@ export const METRICS = [
 
 export const EXPERIENCE = [
   {
+    id: "trimble",
     dates: "2021 — now",
     role: "Instructional Designer",
     org: "Trimble Transportation",
     where: "Remote · Princeton, NJ",
+    tag: "Enterprise SaaS",
+    color: "#38BDF8",
     exec: "AI-assisted script + voice pipeline for a 50–60+ video SaaS series. First customer credentialing program for CoPilot. Learn.Transportation site owner.",
     design:
       "Camtasia, Storyline, NotebookLM, Gemini, synthetic voice. Built the workflow so drafting is polish, not research-from-scratch.",
     explorer:
       "TMT Fleet Maintenance moving to SaaS created a 50–60+ video demand on a one-person production seat. Grounded NotebookLM on the full doc set and gold-standard scripts; Gemini and synthetic voice handle draft and VO; I keep SME review and final cut. Also launched CoPilot customer certification (v10/v11) and manage Learn.Transportation.",
+    overview: {
+      exec: "Senior instructional designer for B2B transportation software. The job is throughput and customer enablement: production systems, credentialing, and a support site a small L&D team can actually run.",
+      design:
+        "I own the authoring stack — Camtasia, Storyline, NotebookLM, Gemini, synthetic voice — and the review gates around it. The design problem is how to keep house voice and product accuracy while the catalog has to move at SaaS speed.",
+      explorer:
+        "Trimble Transportation is remote, Princeton-based. I produce training for TMT Fleet Maintenance, CoPilot, and related logistics products, manage Learn.Transportation, and built the AI pipeline that lets one designer cover a series that used to look like a team’s workload.",
+    },
+    duties: [
+      "Design and produce video, eLearning, and assessments for Trimble Transportation products, including TMT Fleet Maintenance and CoPilot.",
+      "Collaborate with engineering, documentation, marketing, and product so training lands with software releases.",
+      "Own and administer the Learn.Transportation WordPress support site.",
+      "Design customer certification pathways, including scenario-based assessments.",
+      "Build grounded AI authoring workflows, prompt libraries, and human-in-the-loop review.",
+      "Mentor onboarding designers and share reusable templates across the group.",
+    ],
+    accomplishments: [
+      "Engineered a grounded script + voiceover pipeline (NotebookLM, Gemini, synthetic voice) that cut drafting from 3–4 hours to 5–10 minutes and removed external VO vendor fees.",
+      "Covered a 50–60+ instructional video series for TMT’s SaaS transition on a one-person production seat.",
+      "Launched Trimble Transportation’s first customer credentialing program for CoPilot (v10/v11), including assessments delivered for the Insight conference.",
+      "Built the TMT Fleet Maintenance coursebook and a Storyline Core Tracking assessment that extended the credentialing work.",
+      "Formulated prompt libraries and AI guardrails adopted by teammates.",
+    ],
+    skills: [
+      "Generative AI Strategy & Implementation",
+      "AI Context Ingestion & Grounding",
+      "Human-in-the-Loop Workflow Design",
+      "Prompt Engineering",
+      "Google Gemini",
+      "Camtasia",
+      "Articulate Storyline",
+      "Video Production",
+      "Assessment & Credentialing",
+      "Cost Optimization & Vendor Elimination",
+      "Organizational Scaling & Throughput",
+      "L&D OKR & ROI Alignment",
+    ],
   },
   {
+    id: "cleveland",
     dates: "2019 — 2021",
     role: "Instructional Designer",
     org: "Cleveland University",
     where: "Overland Park, KS",
+    tag: "Higher ed · Governance",
+    color: "#0D9488",
     exec: "Owned distance education operations. Moved 100+ on-ground courses online in the COVID window. Wrote the first Faculty Manual and a QM-inspired review process.",
     design:
       "Policy, rubric, ExamSoft admin, Quality Matters coordinator. The work was governance as much as course design.",
     explorer:
       "Responsible for distance ed end to end — support through accreditation. Authored the Distance Education Faculty Manual, formed the Instructional Technology Committee, administered ExamSoft, and ran QM coordination for the campus.",
+    overview: {
+      exec: "Campus owner for distance education: operations, accreditation, and the COVID pivot. After the lights stayed on, the work was to leave policy and review behind so quality did not live in one inbox.",
+      design:
+        "The designed objects were a faculty manual, a QM-inspired rubric, ExamSoft administration, and a committee. Course files mattered; the system they sat in mattered more.",
+      explorer:
+        "I was the instructional designer responsible for distance ed from user support through accreditation, supporting 500+ faculty, staff, and students. COVID collapsed the timeline. The Faculty Manual and review process were how we raised the floor afterward.",
+    },
+    duties: [
+      "Own distance education operations from faculty/student support through accreditation compliance.",
+      "Consult with faculty on course design, assessment, and online teaching practice.",
+      "Administer ExamSoft: system administration, training, and support.",
+      "Serve as campus Quality Matters Coordinator.",
+      "Author distance-education policy, procedures, and faculty-facing guidance.",
+      "Lead the Instructional Technology Committee.",
+    ],
+    accomplishments: [
+      "Directed the COVID emergency transition of 100+ on-ground courses to online delivery with no stoppage in student learning.",
+      "Authored Cleveland University’s inaugural Distance Education Faculty Manual.",
+      "Instituted a Quality Matters–inspired review rubric and applied it to current online courses and new developments.",
+      "Chartered and led the Instructional Technology Committee.",
+      "Held QM Coordinator and ExamSoft administrator roles for the campus.",
+    ],
+    skills: [
+      "Crisis Leadership & Business Continuity",
+      "Enterprise Policy & Governance",
+      "Accreditation & Quality Assurance Frameworks",
+      "Quality Matters",
+      "ExamSoft",
+      "Learning Management Systems",
+      "Interdisciplinary Committee Leadership",
+      "Risk Mitigation & Change Management",
+      "SME & Faculty Consultation",
+      "Team Mentorship & Upskilling",
+      "Instructional Design",
+    ],
   },
   {
+    id: "dtu-role",
     dates: "2018 — 2019",
     role: "Expert & Lecturer",
     org: "Duy Tan University",
     where: "Đà Nẵng, Vietnam",
+    tag: "International · Process",
+    color: "#0D9488",
     exec: "Designed the university’s online course development process from scratch. Advised leadership and designed UI for campus learning tools.",
     design:
       "A 50-week, five-phase process with overlapping gates and a 4-week contingency buffer. Also UI for exam, portfolio, and anti-plagiarism tools.",
     explorer:
       "International consultant to the online education department. No shared process existed; instructors built courses in isolation. I left them a process, a model, and UI work for the exam system, student portfolio, and anti-plagiarism tools. Taught TOEFL three sections a semester.",
+    overview: {
+      exec: "International online-learning consultant to university leadership in Đà Nẵng. The brief was not a course package. It was a process the department could keep after I left.",
+      design:
+        "I designed a 50-week, five-phase lifecycle with overlapping gates, weekly check-ins, and a four-week contingency buffer — plus UI for campus exam, portfolio, and anti-plagiarism tools.",
+      explorer:
+        "Appointed as an expert and lecturer: advising executives, managing collaborators who produced learning materials, teaching TOEFL three sections a semester, and building the first real course-development process the online education department had.",
+    },
+    duties: [
+      "Advise university leaders on online-learning practice, course quality, and development process.",
+      "Design and document an end-to-end course creation lifecycle for faculty, production, and academic departments.",
+      "Coordinate collaborators producing learning materials and keep development on deadline.",
+      "Consult on UI for campus learning tools with the Center for Software Engineering.",
+      "Teach TOEFL, three interactive sections per semester.",
+    ],
+    accomplishments: [
+      "Designed a 50-week, five-phase online course development framework where none existed, with RACI across Developer, Team, and Department.",
+      "Embedded overlapping content gates and a 4-week contingency buffer so launches did not depend on a last-week dump.",
+      "Directed UX/UI for the DTU Exam System, student portfolio, and anti-plagiarism tools.",
+      "Left capacity behind: forms, sample course, and a timeline a new developer could be handed.",
+    ],
+    skills: [
+      "End-to-End PMO Lifecycle Design",
+      "Instructional Design",
+      "Curriculum Pathway Architecture",
+      "Cross-Functional Stakeholder Alignment",
+      "Organizational Scaling & Throughput",
+      "Project Management",
+      "SME & Faculty Consultation",
+      "Web Design",
+      "Educational Technology",
+      "Adult Learning Theory",
+      "E-Learning",
+    ],
   },
   {
+    id: "columbia-role",
     dates: "2013 — 2017",
     role: "Instructional Designer / Technologist",
     org: "Columbia College",
     where: "Columbia, MO",
+    tag: "Higher ed · Systems",
+    color: "#D97706",
     exec: "Responsive HTML/CSS template standardized 300+ D2L courses. Hybrid pilots. Fusion 2017 presentation. Professional Excellence nominee, 2016.",
     design:
       "In-house Bootstrap template instead of consultants. Still the standard. Custom homepage, responsive content, banners, faculty video.",
     explorer:
       "Started as the multimedia/technologist on the ID team, then led developments. The template replaced a landscape where every course looked different and none were truly responsive. Co-authored D2L Fusion 2017: “Reinventing Online Courses with a Dynamic Custom Homepage and Responsive Content.”",
+    overview: {
+      exec: "From instructional technologist to instructional designer. The durable output is a course template that standardized 300+ D2L courses and is still the standard.",
+      design:
+        "An in-house Bootstrap/HTML system that dropped into Brightspace instead of a consulting SOW. One homepage, one navigation model, banners and media that belonged to the same system.",
+      explorer:
+        "I started handling multimedia and HTML5/CSS for the ID team, then led course developments as project manager. The template work, hybrid pilots, and the Fusion 2017 talk are the same idea: make the good path the easy path.",
+    },
+    duties: [
+      "Project-manage online and hybrid course developments with faculty SMEs — from objectives through technical validation.",
+      "Design and maintain HTML/CSS templates and learning objects inside D2L Brightspace.",
+      "Produce course media: video, graphics, banners, and faculty-facing assets.",
+      "Pilot hybrid course offerings, from process design through course build.",
+      "Work with LMS administration to keep the design system intact across the catalog.",
+    ],
+    accomplishments: [
+      "Built a responsive HTML/CSS/Bootstrap template that standardized presentation and navigation across 300+ online and hybrid courses; still in use.",
+      "Replaced a landscape of one-off course designs without hiring external consultants.",
+      "Co-authored and presented at D2L Fusion 2017: “Reinventing Online Courses with a Dynamic Custom Homepage and Responsive Content.”",
+      "Nominated for the institutional Professional Excellence Award, 2016.",
+      "Stood up the college’s first hybrid delivery pilots.",
+    ],
+    skills: [
+      "UX/UI Standardization & Template Engineering",
+      "HTML & CSS",
+      "JavaScript",
+      "D2L Brightspace",
+      "Learning Management Systems",
+      "Universal Design & Digital Accessibility",
+      "Web Design",
+      "Graphic Design",
+      "Instructional Design",
+      "Quality Matters",
+      "Video Production",
+      "End-to-End PMO Lifecycle Design",
+    ],
   },
 ];
 

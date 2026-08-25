@@ -45,11 +45,18 @@ function renderExperience() {
   root.replaceChildren(
     ...EXPERIENCE.map((job) => {
       const li = document.createElement("li");
+      li.className = "job-card";
+      li.dataset.jobId = job.id;
+      li.tabIndex = 0;
+      li.setAttribute("role", "button");
+      li.setAttribute("aria-label", `Open role: ${job.role} at ${job.org}`);
+      li.style.setProperty("--case", job.color);
       li.innerHTML = `
         <p class="when">${job.dates}</p>
         <h3>${job.role}</h3>
         <p class="org">${job.org} · ${job.where}</p>
-        <p class="job-copy" data-job="${job.org}"></p>`;
+        <p class="job-copy" data-job="${job.org}"></p>
+        <span class="text-btn" aria-hidden="true">Open role</span>`;
       return li;
     }),
   );
