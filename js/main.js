@@ -150,11 +150,17 @@ const themeKey = "mw-theme";
 const themeBtn = document.getElementById("theme-toggle");
 const savedTheme = localStorage.getItem(themeKey);
 const theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
-document.body.dataset.theme = theme;
-themeBtn?.addEventListener("click", () => {
-  const next = document.body.dataset.theme === "dark" ? "light" : "dark";
+
+function applyTheme(next) {
+  document.documentElement.dataset.theme = next;
   document.body.dataset.theme = next;
   localStorage.setItem(themeKey, next);
+}
+
+applyTheme(theme);
+themeBtn?.addEventListener("click", () => {
+  const next = document.body.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(next);
 });
 
 const canvas = document.getElementById("cone");
