@@ -101,6 +101,9 @@ function renderCases() {
       const article = document.createElement("article");
       article.className = "case-card";
       article.dataset.case = item.id;
+      article.tabIndex = 0;
+      article.setAttribute("role", "button");
+      article.setAttribute("aria-label", `Open case: ${item.title}`);
       article.style.setProperty("--case", item.color);
       article.innerHTML = `
         <div class="case-card__top">
@@ -109,8 +112,7 @@ function renderCases() {
         </div>
         <h3>${item.title}</h3>
         <p class="case-card__meta">${item.meta}</p>
-        <p class="case-card__summary">${item.summary.exec}</p>
-        <button type="button" class="text-btn" data-open-case>Open case</button>`;
+        <p class="case-card__summary">${item.summary.exec}</p>`;
       return article;
     }),
   );

@@ -184,10 +184,15 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     card.addEventListener("focus", () => cone?.highlight(data.skills));
     card.addEventListener("blur", () => cone?.clearHighlight());
 
-    const opener = card.querySelector("[data-open-case]") || card;
-    opener.addEventListener("click", (e) => {
+    card.addEventListener("click", (e) => {
       e.preventDefault();
       open(id, card);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open(id, card);
+      }
     });
   });
 

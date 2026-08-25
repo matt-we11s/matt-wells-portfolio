@@ -158,13 +158,13 @@
     <div class="overlay" id="case-overlay" hidden>
       <div class="overlay__scrim" data-close-case></div>
       <article class="overlay__panel" id="case-dialog" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="case-title">
-        <button type="button" class="overlay__close" data-close-case aria-label="Close case">Close</button>
+        <button type="button" class="overlay__close" data-close-case aria-label="Close">×</button>
         <div class="overlay__top">
           <span data-field="number">01</span>
-          <span class="case-card__tag" data-field="tag"></span>
         </div>
         <h2 id="case-title" data-field="title"></h2>
         <p class="case-card__meta" data-field="meta"></p>
+        <span class="case-card__tag overlay__tag" data-field="tag"></span>
         <div data-mode="case">
           <div class="overlay__figure" data-field="figure"></div>
           <h3>The problem</h3>
