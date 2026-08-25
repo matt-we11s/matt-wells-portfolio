@@ -417,6 +417,10 @@ export const CASES = [
       "Web Design",
     ],
     figure: "dtu",
+    video: {
+      id: "Aeiud-0iM8E",
+      title: "DTU course development process",
+    },
   },
   {
     id: "columbia",
