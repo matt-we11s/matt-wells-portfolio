@@ -10,60 +10,36 @@ export const PROFILE = {
 export const PERSONAS = {
   exec: {
     id: "exec",
-    label: "Busy Executive / Recruiter",
-    short: "Exec / Recruiter",
-    hint: "Short, scannable, metrics first",
+    label: "Strategic Leader",
+    short: "Strategic Leader",
+    hint: "Executive outcomes, scalability, ROI, and core delivery metrics.",
   },
   design: {
     id: "design",
-    label: "Design Lead",
-    short: "Design Lead",
-    hint: "Craft and process first",
+    label: "Design & Systems Lead",
+    short: "Design & Systems Lead",
+    hint: "Pedagogical frameworks, template architecture, tech stack integrations, and design rationale.",
   },
   explorer: {
     id: "explorer",
     label: "Curious Explorer",
-    short: "Explorer",
-    hint: "See everything",
+    short: "Curious Explorer",
+    hint: "Comprehensive deep dive, full project assets, and raw artifacts.",
   },
 };
 
 export const COPY = {
   exec: {
-    eyebrow: "Instructional Design · L&D systems · Missouri",
-    headline: "I design the systems that let learning scale.",
-    about:
-      "Twelve years building L&D operations across higher education and B2B SaaS. I turn high-volume training problems into processes, templates, and AI-assisted pipelines a small team can actually run.",
-    lede:
-      "Director-level systems work: throughput, policy, and measurable outcomes — not one-off courses.",
-    workIntro:
-      "Four pieces of work. Each one is a system other people could keep using.",
     close:
-      "If you need someone who can stand up process, quality, and production capacity — not just ship another module — let’s talk.",
+      "Open to Director / Lead L&D and Instructional Systems Architecture roles (Remote).",
   },
   design: {
-    eyebrow: "Instructional designer · Missouri",
-    headline: "I design the path learners actually take.",
-    about:
-      "I care about alignment: objectives, content that supports them, and assessments that measure the right things. Templates, processes, and AI workflows are just different ways of taking a learner from lost to oriented.",
-    lede:
-      "Templates other designers will adopt. Processes faculty will follow. Interfaces that feel like one system.",
-    workIntro:
-      "Selected work — process, templates, and the production pipeline behind them.",
     close:
-      "If you’re building clearer online experiences and want a design partner who also thinks in systems, I’d like to hear from you.",
+      "Open to Director / Lead L&D and Instructional Systems Architecture roles (Remote).",
   },
   explorer: {
-    eyebrow: "Instructional Design · Higher ed & enterprise · Missouri",
-    headline: "Courses are maps. Someone has to draw them.",
-    about:
-      "I’ve standardized 300+ courses on one template, stood up a university distance-ed operation during COVID, designed a 50-week development process in Vietnam, and I’m now using grounded generative AI so one designer can run a 50+ video series.",
-    lede:
-      "Higher education, a technical university in Đà Nẵng, and Trimble Transportation. Same job: make the path clearer.",
-    workIntro:
-      "Case studies, the skills that sit underneath them, and the longer story if you want it.",
     close:
-      "Open to remote instructional design and L&D leadership roles. If you’re building something that has to work at scale, write me.",
+      "Open to Director / Lead L&D and Instructional Systems Architecture roles (Remote).",
   },
 };
 
@@ -170,7 +146,7 @@ export const CASES = [
     id: "ai",
     number: "01",
     tag: "Throughput",
-    color: "#e11d72",
+    color: "#38BDF8",
     title: "AI Scriptwriting + Voiceovers",
     meta: "Trimble Transportation · TMT Fleet Maintenance",
     summary: {
@@ -234,7 +210,7 @@ export const CASES = [
     id: "dtu",
     number: "02",
     tag: "Process",
-    color: "#8b5cf6",
+    color: "#0D9488",
     title: "DTU Course Development Process",
     meta: "Duy Tan University · Đà Nẵng",
     summary: {
@@ -295,7 +271,7 @@ export const CASES = [
     id: "columbia",
     number: "03",
     tag: "System",
-    color: "#6366f1",
+    color: "#D97706",
     title: "Columbia College Course Template",
     meta: "Columbia College · D2L Brightspace",
     summary: {
@@ -356,7 +332,7 @@ export const CASES = [
     id: "cleveland",
     number: "04",
     tag: "Governance",
-    color: "#3b82f6",
+    color: "#38BDF8",
     title: "Cleveland Distance Ed & Faculty Handbook",
     meta: "Cleveland University · Crisis + policy",
     summary: {

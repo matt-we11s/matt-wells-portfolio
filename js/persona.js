@@ -1,6 +1,6 @@
 import { COPY, PERSONAS } from "./content.js";
 
-const KEY = "mw-persona";
+const KEY = "mw-persona-v2";
 
 export function initPersona({ onChange }) {
   const buttons = [...document.querySelectorAll("button[data-persona]")];

@@ -223,5 +223,6 @@ Object.entries(PERSONAS).forEach(([id, meta]) => {
     const hint = document.createElement("small");
     hint.textContent = meta.hint;
     btn.append(hint);
+    btn.title = meta.hint;
   }
 });

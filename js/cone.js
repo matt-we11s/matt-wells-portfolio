@@ -1,8 +1,20 @@
+function mixRgb(a, b, t) {
+  return [
+    Math.round(a[0] + (b[0] - a[0]) * t),
+    Math.round(a[1] + (b[1] - a[1]) * t),
+    Math.round(a[2] + (b[2] - a[2]) * t),
+  ];
+}
+
 function colorForLevel(t, alpha = 1) {
-  const r = Math.round(30 + t * 200);
-  const g = Math.round(80 - t * 50);
-  const b = Math.round(220 - t * 140);
-  return `rgba(${r},${g},${b},${alpha})`;
+  const teal = [13, 148, 136];
+  const sky = [56, 189, 248];
+  const amber = [217, 119, 6];
+  let rgb;
+  if (t < 0.42) rgb = mixRgb(teal, sky, t / 0.42);
+  else if (t < 0.78) rgb = sky;
+  else rgb = amber;
+  return `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha})`;
 }
 
 function conePositions(items, width, height) {
@@ -302,7 +314,7 @@ export function createCone({ canvas, statusEl, skills: skillData, reducedMotion 
 
     ctx.clearRect(0, 0, width, height);
     const grd = ctx.createRadialGradient(width / 2, height * 0.55, 20, width / 2, height * 0.55, width * 0.5);
-    grd.addColorStop(0, "rgba(59,130,246,0.05)");
+    grd.addColorStop(0, "rgba(56,189,248,0.06)");
     grd.addColorStop(1, "rgba(0,0,0,0)");
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, width, height);
