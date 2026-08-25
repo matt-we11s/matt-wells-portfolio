@@ -478,6 +478,10 @@ export const CASES = [
       "Quality Matters",
     ],
     figure: "columbia",
+    video: {
+      id: "yEvw8SsIOU0",
+      title: "Columbia College course template",
+    },
   },
   {
     id: "cleveland",
