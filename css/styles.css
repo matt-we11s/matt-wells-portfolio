@@ -904,7 +904,7 @@ body[data-theme="light"] .btn--solid {
 .overlay__panel {
   position: relative;
   width: min(760px, 100%);
-  max-height: calc(100dvh - 2.4rem);
+  max-height: calc(100vh - 2.4rem);
   overflow: auto;
   overscroll-behavior: contain;
   padding: 1.6rem 1.6rem 2rem;
@@ -1145,28 +1145,6 @@ body[data-theme="light"] .overlay__close {
 
   .cone-wrap {
     height: 400px;
-  }
-
-  .overlay {
-    padding: 0.45rem;
-    padding-top: max(0.45rem, env(safe-area-inset-top));
-    padding-bottom: max(0.45rem, env(safe-area-inset-bottom));
-    align-items: stretch;
-    place-items: stretch;
-  }
-
-  .overlay__panel {
-    width: 100%;
-    max-width: none;
-    max-height: calc(100dvh - 0.9rem);
-    height: auto;
-    border-radius: 16px;
-    padding: 1.15rem 1rem 1.35rem;
-  }
-
-  .overlay__video iframe {
-    width: min(200px, 62vw);
-    max-height: 38dvh;
   }
 }
 
