@@ -7,6 +7,7 @@
   --accent-blue: #38bdf8;
   --accent-amber: #d97706;
   --accent-teal: #0d9488;
+  --accent-lime: #a3e635;
   --bg: var(--bg-canvas);
   --bg-elev: var(--bg-surface);
   --ink: var(--text-main);
@@ -29,6 +30,7 @@ body[data-theme="light"] {
   --accent-blue: #0369a1;
   --accent-amber: #b45309;
   --accent-teal: #0f766e;
+  --accent-lime: #4d7c0f;
   --bg: var(--bg-canvas);
   --bg-elev: var(--bg-surface);
   --ink: var(--text-main);
@@ -90,19 +92,20 @@ img {
 }
 
 .progress {
-  position: fixed;
-  top: 0;
+  position: absolute;
   left: 0;
   right: 0;
+  bottom: 0;
   height: 3px;
-  z-index: 40;
+  z-index: 1;
   background: transparent;
+  pointer-events: none;
 }
 
 .progress__fill {
   height: 100%;
   width: 0;
-  background: linear-gradient(90deg in oklab, var(--accent-teal), var(--accent-blue), var(--accent-amber));
+  background: linear-gradient(90deg in oklab, var(--accent-lime), var(--accent-blue), var(--accent-amber));
 }
 
 .nav {
@@ -115,6 +118,7 @@ img {
   padding: 0.85rem 6vw;
   background: color-mix(in srgb, var(--bg) 82%, transparent);
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -608,15 +612,8 @@ body[data-theme="light"] .btn--solid {
   height: 520px;
   border-radius: 18px;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse at 50% 62%, #131b2e 0%, #090d16 72%);
+  background: var(--card);
   border: 1px solid var(--line);
-}
-
-html[data-theme="light"] .cone-wrap,
-body[data-theme="light"] .cone-wrap {
-  background:
-    radial-gradient(ellipse at 50% 62%, #e8e2d6 0%, #f4efe6 72%);
 }
 
 #cone {
@@ -660,7 +657,7 @@ body[data-theme="light"] .cone-wrap {
   border-radius: 50%;
 }
 
-.dot--teal { background: var(--accent-teal); }
+.dot--lime { background: var(--accent-lime); }
 .dot--blue { background: var(--accent-blue); }
 .dot--amber { background: var(--accent-amber); }
 
@@ -765,48 +762,53 @@ body[data-theme="light"] .cone-wrap {
   display: grid;
   place-items: center;
   padding: 1.2rem;
-  opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.28s var(--ease);
 }
 
 .overlay.is-open {
-  opacity: 1;
+  visibility: visible;
   pointer-events: auto;
 }
 
 .overlay__scrim {
   position: absolute;
   inset: 0;
-  background: color-mix(in srgb, var(--bg-canvas) 58%, transparent);
+  background: rgba(9, 13, 22, 0.35);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
 }
 
 .overlay__panel {
   position: relative;
   width: min(760px, 100%);
-  max-height: calc(100vh - 2.4rem);
+  max-height: calc(100dvh - 2.4rem);
   overflow: auto;
+  overscroll-behavior: contain;
   padding: 1.6rem 1.6rem 2rem;
   border-radius: 20px;
-  background: color-mix(in srgb, var(--bg-surface) 58%, transparent);
-  border: 1px solid color-mix(in srgb, var(--text-main) 14%, var(--line));
+  background: rgba(19, 27, 46, 0.42);
+  border: 1px solid rgba(248, 250, 252, 0.16);
   box-shadow:
     var(--shadow),
-    inset 0 1px 0 color-mix(in srgb, var(--text-main) 12%, transparent);
-  backdrop-filter: blur(22px) saturate(1.2);
-  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+    inset 0 1px 0 rgba(248, 250, 252, 0.14);
+  backdrop-filter: blur(28px) saturate(1.35);
+  -webkit-backdrop-filter: blur(28px) saturate(1.35);
   outline: none;
 }
 
 html[data-theme="light"] .overlay__scrim,
 body[data-theme="light"] .overlay__scrim {
-  background: color-mix(in srgb, var(--bg-canvas) 42%, transparent);
+  background: rgba(244, 239, 230, 0.28);
 }
 
 html[data-theme="light"] .overlay__panel,
 body[data-theme="light"] .overlay__panel {
-  background: color-mix(in srgb, var(--bg-surface) 88%, transparent);
-  border: 1px solid var(--line);
+  background: rgba(255, 253, 248, 0.58);
+  border: 1px solid rgba(21, 32, 51, 0.12);
+  box-shadow:
+    var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .overlay__close {
@@ -814,8 +816,8 @@ body[data-theme="light"] .overlay__panel {
   top: 1rem;
   right: 1rem;
   z-index: 1;
-  border: 1px solid color-mix(in srgb, var(--text-main) 12%, var(--line));
-  background: color-mix(in srgb, var(--bg-surface) 45%, transparent);
+  border: 1px solid rgba(248, 250, 252, 0.16);
+  background: rgba(19, 27, 46, 0.4);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 999px;
@@ -826,7 +828,16 @@ body[data-theme="light"] .overlay__panel {
   line-height: 1;
 }
 
+html[data-theme="light"] .overlay__close,
+body[data-theme="light"] .overlay__close {
+  border-color: rgba(21, 32, 51, 0.12);
+  background: rgba(255, 253, 248, 0.55);
+}
+
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .overlay__scrim {
+    background: rgba(9, 13, 22, 0.72);
+  }
   .overlay__panel,
   .overlay__close {
     background: var(--bg-elev);
@@ -1002,6 +1013,28 @@ body[data-theme="light"] .overlay__panel {
 
   .cone-wrap {
     height: 400px;
+  }
+
+  .overlay {
+    padding: 0.45rem;
+    padding-top: max(0.45rem, env(safe-area-inset-top));
+    padding-bottom: max(0.45rem, env(safe-area-inset-bottom));
+    align-items: stretch;
+    place-items: stretch;
+  }
+
+  .overlay__panel {
+    width: 100%;
+    max-width: none;
+    max-height: calc(100dvh - 0.9rem);
+    height: auto;
+    border-radius: 16px;
+    padding: 1.15rem 1rem 1.35rem;
+  }
+
+  .overlay__video iframe {
+    width: min(200px, 62vw);
+    max-height: 38dvh;
   }
 }
 

@@ -1,19 +1,13 @@
-function mixRgb(a, b, t) {
-  return [
-    Math.round(a[0] + (b[0] - a[0]) * t),
-    Math.round(a[1] + (b[1] - a[1]) * t),
-    Math.round(a[2] + (b[2] - a[2]) * t),
-  ];
+function funnelPalette() {
+  const light = document.documentElement.dataset.theme === "light";
+  return light
+    ? { base: [77, 124, 15], mid: [3, 105, 161], top: [180, 83, 9] }
+    : { base: [163, 230, 53], mid: [56, 189, 248], top: [217, 119, 6] };
 }
 
 function colorForLevel(t, alpha = 1) {
-  const teal = [13, 148, 136];
-  const sky = [56, 189, 248];
-  const amber = [217, 119, 6];
-  let rgb;
-  if (t < 0.42) rgb = mixRgb(teal, sky, t / 0.42);
-  else if (t < 0.78) rgb = sky;
-  else rgb = amber;
+  const { base, mid, top } = funnelPalette();
+  const rgb = t < 0.42 ? base : t < 0.78 ? mid : top;
   return `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha})`;
 }
 
@@ -97,24 +91,30 @@ export function createCone({ canvas, statusEl, skills: skillData, reducedMotion 
   });
 
   const links = [];
+  function addLink(i, j) {
+    if (i === j) return;
+    const a = Math.min(i, j);
+    const b = Math.max(i, j);
+    if (!links.some((l) => l.a === a && l.b === b)) links.push({ a, b });
+  }
   for (let i = 0; i < skills.length; i += 1) {
-    const dists = [];
+    const near = [];
+    const ring = [];
     for (let j = 0; j < skills.length; j += 1) {
       if (i === j) continue;
       const dx = skills[i].baseX - skills[j].baseX;
       const dy = skills[i].baseY - skills[j].baseY;
       const dz = skills[i].baseZ - skills[j].baseZ;
+      near.push({ j, dist: Math.sqrt(dx * dx + dy * dy + dz * dz) });
       const levelDiff = Math.abs(skills[i].level - skills[j].level);
-      const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) + levelDiff * 40;
-      dists.push({ j, dist });
+      if (levelDiff <= 0.12) {
+        ring.push({ j, dist: Math.sqrt(dx * dx + dz * dz) + levelDiff * 18 });
+      }
     }
-    dists.sort((a, b) => a.dist - b.dist);
-    for (let k = 0; k < 2; k += 1) {
-      const j = dists[k].j;
-      const a = Math.min(i, j);
-      const b = Math.max(i, j);
-      if (!links.some((l) => l.a === a && l.b === b)) links.push({ a, b });
-    }
+    near.sort((a, b) => a.dist - b.dist);
+    ring.sort((a, b) => a.dist - b.dist);
+    for (let k = 0; k < Math.min(4, near.length); k += 1) addLink(i, near[k].j);
+    for (let k = 0; k < Math.min(3, ring.length); k += 1) addLink(i, ring[k].j);
   }
 
   let rotY = 0;
@@ -319,12 +319,12 @@ export function createCone({ canvas, statusEl, skills: skillData, reducedMotion 
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, width, height);
 
-    ctx.lineWidth = 0.7;
+    ctx.lineWidth = 0.85;
     links.forEach(({ a, b }) => {
       const sa = skills[a];
       const sb = skills[b];
       if (sa.opacity < 0.08 || sb.opacity < 0.08) return;
-      const alpha = Math.min(sa.opacity, sb.opacity) * 0.2;
+      const alpha = Math.min(sa.opacity, sb.opacity) * 0.32;
       ctx.beginPath();
       ctx.moveTo(sa.screenX, sa.screenY);
       ctx.lineTo(sb.screenX, sb.screenY);
