@@ -1,8 +1,22 @@
 function funnelPalette() {
   const light = document.documentElement.dataset.theme === "light";
   return light
-    ? { base: [77, 124, 15], mid: [3, 105, 161], top: [180, 83, 9] }
-    : { base: [163, 230, 53], mid: [56, 189, 248], top: [217, 119, 6] };
+    ? {
+        base: [77, 124, 15],
+        mid: [3, 105, 161],
+        top: [180, 83, 9],
+        link: [71, 85, 105],
+        linkAlpha: 0.55,
+        shadow: true,
+      }
+    : {
+        base: [163, 230, 53],
+        mid: [56, 189, 248],
+        top: [217, 119, 6],
+        link: [148, 163, 184],
+        linkAlpha: 0.32,
+        shadow: false,
+      };
 }
 
 function colorForLevel(t, alpha = 1) {
@@ -114,7 +128,7 @@ export function createCone({ canvas, statusEl, skills: skillData, reducedMotion 
     near.sort((a, b) => a.dist - b.dist);
     ring.sort((a, b) => a.dist - b.dist);
     for (let k = 0; k < Math.min(4, near.length); k += 1) addLink(i, near[k].j);
-    for (let k = 0; k < Math.min(3, ring.length); k += 1) addLink(i, ring[k].j);
+    for (let k = 0; k < Math.min(2, ring.length); k += 1) addLink(i, ring[k].j);
   }
 
   let rotY = 0;
@@ -313,22 +327,38 @@ export function createCone({ canvas, statusEl, skills: skillData, reducedMotion 
     });
 
     ctx.clearRect(0, 0, width, height);
+    const palette = funnelPalette();
     const grd = ctx.createRadialGradient(width / 2, height * 0.55, 20, width / 2, height * 0.55, width * 0.5);
-    grd.addColorStop(0, "rgba(56,189,248,0.06)");
+    grd.addColorStop(0, palette.shadow ? "rgba(3,105,161,0.05)" : "rgba(56,189,248,0.06)");
     grd.addColorStop(1, "rgba(0,0,0,0)");
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, width, height);
 
-    ctx.lineWidth = 0.85;
+    if (palette.shadow) {
+      ctx.save();
+      ctx.shadowColor = "rgba(21, 32, 51, 0.22)";
+      ctx.shadowBlur = 18;
+      ctx.shadowOffsetY = 8;
+      projected.forEach(({ s, p, r }) => {
+        if (s.opacity < 0.15) return;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(21, 32, 51, 0.28)";
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+
+    ctx.lineWidth = palette.shadow ? 1.05 : 0.85;
     links.forEach(({ a, b }) => {
       const sa = skills[a];
       const sb = skills[b];
       if (sa.opacity < 0.08 || sb.opacity < 0.08) return;
-      const alpha = Math.min(sa.opacity, sb.opacity) * 0.32;
+      const alpha = Math.min(sa.opacity, sb.opacity) * palette.linkAlpha;
       ctx.beginPath();
       ctx.moveTo(sa.screenX, sa.screenY);
       ctx.lineTo(sb.screenX, sb.screenY);
-      ctx.strokeStyle = `rgba(148, 163, 184, ${alpha})`;
+      ctx.strokeStyle = `rgba(${palette.link[0]}, ${palette.link[1]}, ${palette.link[2]}, ${alpha})`;
       ctx.stroke();
     });
 
