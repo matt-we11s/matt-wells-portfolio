@@ -34,7 +34,8 @@
         <a href="#contact">Contact</a>
       </nav>
       <div class="nav__tools">
-        <button type="button" class="icon-btn" id="badge-toggle" aria-label="Achievements">
+        <button type="button" class="icon-btn goals-btn" id="badge-toggle" aria-expanded="false" aria-controls="badge-rail">
+          <span class="goals-btn__label">Goals</span>
           <span id="badge-count">0/8</span>
         </button>
         <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle light and dark">
@@ -46,11 +47,19 @@
       </div>
     </header>
 
-    <ol class="badge-rail" id="badge-rail"></ol>
+    <div class="badge-panel" id="badge-rail" hidden>
+      <div class="badge-panel__head">
+        <p>Portfolio goals</p>
+        <span id="badge-panel-count">0/8</span>
+      </div>
+      <ol class="badge-list" id="badge-list"></ol>
+      <button type="button" class="badge-reset" id="badge-reset">Reset progress</button>
+    </div>
 
     <div class="toast" id="toast" hidden>
-      <p>Unlocked</p>
+      <p id="toast-kicker">Goal unlocked</p>
       <strong id="toast-name"></strong>
+      <span id="toast-detail"></span>
     </div>
 
     <main id="top">

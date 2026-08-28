@@ -227,8 +227,9 @@ document.querySelectorAll("[data-email]").forEach((el) => {
   el.addEventListener("click", () => achievements.unlock("line"));
 });
 
-document.getElementById("badge-toggle")?.addEventListener("click", () => {
-  document.getElementById("badge-rail")?.classList.toggle("is-open");
+window.addEventListener("mw-achievements-reset", () => {
+  opened.clear();
+  reachedEnd = false;
 });
 
 Object.entries(PERSONAS).forEach(([id, meta]) => {
