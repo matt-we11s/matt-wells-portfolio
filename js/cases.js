@@ -44,6 +44,9 @@ const FIGURES = {
     </ol>`,
 };
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
   const root = document.getElementById("case-overlay");
   const dialog = document.getElementById("case-dialog");
@@ -67,6 +70,10 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
   };
   const caseBlock = root.querySelector("[data-mode=case]");
   const jobBlock = root.querySelector("[data-mode=job]");
+  const inertTargets = () =>
+    [document.getElementById("site-header"), document.getElementById("main-content"), document.getElementById("badge-rail"), document.getElementById("toast")].filter(
+      Boolean,
+    );
 
   let openId = null;
   let openKind = null;
@@ -107,6 +114,10 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     if (jobBlock) jobBlock.hidden = true;
   }
 
+  function escapeAttr(value) {
+    return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  }
+
   function fillVideo(video) {
     if (!fields.video) return;
     if (!video?.id) {
@@ -115,16 +126,48 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
       return;
     }
     const title = video.title || "Case video";
+    const safeTitle = escapeAttr(title);
+    const id = escapeAttr(video.id);
     fields.video.hidden = false;
     fields.video.innerHTML = `
       <p class="figure__kicker">Video</p>
+      <div class="video-poster" data-video-id="${id}" data-video-title="${safeTitle}">
+        <img
+          src="https://i.ytimg.com/vi/${id}/hqdefault.jpg"
+          alt=""
+          width="480"
+          height="360"
+          loading="lazy"
+        />
+        <div class="video-poster__actions">
+          <button type="button" class="btn btn--solid" data-play-video>Play video</button>
+          <a
+            class="btn"
+            href="https://www.youtube.com/watch?v=${id}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open on YouTube</a>
+        </div>
+      </div>`;
+    const playBtn = fields.video.querySelector("[data-play-video]");
+    playBtn?.addEventListener("click", () => activateVideo(video.id, title));
+  }
+
+  function activateVideo(id, title) {
+    if (!fields.video) return;
+    const safeTitle = escapeAttr(title || "Case video");
+    const safeId = escapeAttr(id);
+    fields.video.innerHTML = `
+      <p class="figure__kicker">Video</p>
       <iframe
-        src="https://www.youtube-nocookie.com/embed/${video.id}"
-        title="${title}"
+        src="https://www.youtube-nocookie.com/embed/${safeId}?autoplay=1"
+        title="${safeTitle}"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
-        loading="lazy"
-      ></iframe>`;
+        tabindex="-1"
+      ></iframe>
+      <p class="video-poster__hint">Press Escape or use Close to leave this dialog. Focus stays outside the player.</p>`;
+    dialog.querySelector(".overlay__close")?.focus();
   }
 
   function clearVideo() {
@@ -156,13 +199,33 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     if (jobBlock) jobBlock.hidden = false;
   }
 
+  function getFocusable() {
+    return [...dialog.querySelectorAll(FOCUSABLE_SELECTOR)].filter((el) => {
+      if (el.hasAttribute("disabled") || el.getAttribute("aria-hidden") === "true") return false;
+      if (el.closest("[hidden]")) return false;
+      if (el.tabIndex < 0) return false;
+      const style = window.getComputedStyle(el);
+      if (style.visibility === "hidden" || style.display === "none") return false;
+      return true;
+    });
+  }
+
+  function setBackgroundInert(on) {
+    inertTargets().forEach((el) => {
+      if (on) el.setAttribute("inert", "");
+      else el.removeAttribute("inert");
+    });
+  }
+
   function show(card) {
     lastFocus = card || document.activeElement;
     root.hidden = false;
     document.body.classList.add("is-cased");
+    setBackgroundInert(true);
     dialog.scrollTop = 0;
     requestAnimationFrame(() => root.classList.add("is-open"));
-    dialog.focus();
+    const closeBtn = dialog.querySelector(".overlay__close");
+    (closeBtn || dialog).focus();
     clearTimeout(readTimer);
     readTimer = window.setTimeout(() => onRead?.(openId), 6500);
   }
@@ -195,6 +258,7 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
     clearTimeout(readTimer);
     root.classList.remove("is-open");
     document.body.classList.remove("is-cased");
+    setBackgroundInert(false);
     clearVideo();
     cone?.reset();
     window.setTimeout(() => {
@@ -251,8 +315,33 @@ export function initCases({ getPersona, cone, onOpen, onRead, onClose }) {
   root.querySelectorAll("[data-close-case]").forEach((btn) => {
     btn.addEventListener("click", close);
   });
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && openId) close();
+    if (!openId) return;
+    if (e.key === "Escape") {
+      e.preventDefault();
+      close();
+      return;
+    }
+    if (e.key !== "Tab") return;
+    const items = getFocusable();
+    if (!items.length) {
+      e.preventDefault();
+      dialog.focus();
+      return;
+    }
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    } else if (!dialog.contains(document.activeElement)) {
+      e.preventDefault();
+      (e.shiftKey ? last : first).focus();
+    }
   });
 
   return { open, openJob, close };

@@ -14,6 +14,7 @@ import { createCone } from "./cone.js";
 import { initCases } from "./cases.js";
 
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
@@ -117,16 +118,39 @@ function renderCases() {
   );
 }
 
+let cone = null;
+
 function renderSkillList() {
   const root = document.getElementById("skill-list");
   if (!root) return;
   root.replaceChildren(
     ...SKILLS.map((item) => {
       const li = document.createElement("li");
-      li.textContent = item.name;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "skill-chip";
+      btn.textContent = item.name;
+      btn.addEventListener("click", () => {
+        cone?.filter([item.name], item.name);
+      });
+      btn.addEventListener("focus", () => {
+        cone?.highlight([item.name]);
+      });
+      btn.addEventListener("blur", () => {
+        cone?.clearHighlight();
+      });
+      li.append(btn);
       return li;
     }),
   );
+}
+
+function promoteSkillFallback() {
+  const details = document.getElementById("skill-fallback");
+  if (!details) return;
+  if (reduced || coarsePointer) {
+    details.open = true;
+  }
 }
 
 function updateCaseSummaries(persona) {
@@ -142,6 +166,7 @@ renderEdu();
 renderCerts();
 renderCases();
 renderSkillList();
+promoteSkillFallback();
 
 const achievements = initAchievements();
 achievements.unlock("welcome");
@@ -151,10 +176,27 @@ const themeBtn = document.getElementById("theme-toggle");
 const savedTheme = localStorage.getItem(themeKey);
 const theme = savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
 
+function syncThemeColorMeta(next) {
+  const color = next === "dark" ? "#090d16" : "#f4efe6";
+  const fallback = document.querySelector('meta[name="theme-color"]:not([media])');
+  if (fallback) fallback.setAttribute("content", color);
+  document.documentElement.style.colorScheme = next;
+}
+
 function applyTheme(next) {
   document.documentElement.dataset.theme = next;
   document.body.dataset.theme = next;
   localStorage.setItem(themeKey, next);
+  syncThemeColorMeta(next);
+  if (themeBtn) {
+    const isDark = next === "dark";
+    themeBtn.setAttribute("aria-pressed", isDark ? "true" : "false");
+    themeBtn.setAttribute(
+      "aria-label",
+      isDark ? "Dark theme active. Switch to light theme" : "Light theme active. Switch to dark theme",
+    );
+    themeBtn.textContent = isDark ? "Dark" : "Light";
+  }
 }
 
 applyTheme(theme);
@@ -164,7 +206,7 @@ themeBtn?.addEventListener("click", () => {
 });
 
 const canvas = document.getElementById("cone");
-const cone = canvas
+cone = canvas
   ? createCone({
       canvas,
       statusEl: document.getElementById("cone-status"),

@@ -251,6 +251,8 @@ export function createCone({ canvas, statusEl, skills: skillData, reducedMotion 
   canvas.addEventListener(
     "wheel",
     (e) => {
+      // Only steal scroll when the canvas is focused (keyboard / intentional zoom).
+      if (document.activeElement !== canvas) return;
       e.preventDefault();
       zoom = Math.max(0.55, Math.min(2.2, zoom - e.deltaY * 0.0012));
     },
