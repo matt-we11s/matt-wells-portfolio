@@ -148,7 +148,8 @@ function renderSkillList() {
 function promoteSkillFallback() {
   const details = document.getElementById("skill-fallback");
   if (!details) return;
-  if (reduced || coarsePointer) {
+  // Mobile/coarse pointer: keep collapsed to save space; desktop reduced-motion users get it open.
+  if (reduced && !coarsePointer) {
     details.open = true;
   }
 }
