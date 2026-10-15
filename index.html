@@ -8,6 +8,27 @@
       name="description"
       content="Matthew S. Wells scales enterprise learning architecture, curriculum operations, and AI-enabled L&amp;D systems across Higher Ed and B2B SaaS."
     />
+    <link rel="canonical" href="https://mattwells.xyz/" />
+    <meta name="theme-color" content="#090d16" />
+    <meta name="theme-color" content="#090d16" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f4efe6" media="(prefers-color-scheme: light)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mattwells.xyz/" />
+    <meta property="og:title" content="Matthew S. Wells — L&amp;D Leadership &amp; Systems Architecture" />
+    <meta
+      property="og:description"
+      content="Matthew S. Wells scales enterprise learning architecture, curriculum operations, and AI-enabled L&amp;D systems across Higher Ed and B2B SaaS."
+    />
+    <meta property="og:image" content="https://mattwells.xyz/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Matthew S. Wells — L&amp;D Leadership &amp; Systems Architecture" />
+    <meta
+      name="twitter:description"
+      content="Matthew S. Wells scales enterprise learning architecture, curriculum operations, and AI-enabled L&amp;D systems across Higher Ed and B2B SaaS."
+    />
+    <meta name="twitter:image" content="https://mattwells.xyz/og.png" />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,7 +43,8 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body data-theme="dark" data-persona="exec">
-    <header class="nav">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="nav" id="site-header">
       <a class="nav__brand" href="#top">
         <img class="nav__mark" src="./favicon.svg" alt="" />
         Matthew S. Wells
@@ -38,8 +60,8 @@
           <span class="goals-btn__label">Goals</span>
           <span id="badge-count">0/8</span>
         </button>
-        <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle light and dark">
-          Theme
+        <button type="button" class="icon-btn" id="theme-toggle" aria-pressed="true" aria-label="Dark theme active. Switch to light theme">
+          Dark
         </button>
       </div>
       <div class="progress" aria-hidden="true">
@@ -56,17 +78,17 @@
       <button type="button" class="badge-reset" id="badge-reset">Reset progress</button>
     </div>
 
-    <div class="toast" id="toast" hidden>
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden>
       <p id="toast-kicker">Goal unlocked</p>
       <strong id="toast-name"></strong>
       <span id="toast-detail"></span>
     </div>
 
-    <main id="top">
+    <main id="main-content">
       <section class="hero" id="about">
         <div class="hero__glow" aria-hidden="true"></div>
         <p class="eyebrow">L&amp;D Leadership · Systems Architecture</p>
-        <h1>
+        <h1 id="top">
           Matthew S. Wells
           <em>Scaling enterprise learning architecture, curriculum operations, and AI-enabled L&amp;D systems.</em>
         </h1>
@@ -74,13 +96,13 @@
           12+ years directing scalable learning systems, modular curriculum frameworks, and cross-functional teams across Higher Ed and B2B SaaS.
         </p>
 
-        <ul class="metrics" id="metrics"></ul>
-
         <div class="hero__actions">
           <a class="btn btn--solid" href="./resume.html" data-packet>Resume</a>
           <a class="btn" href="./executive-summary.html" data-packet>Executive summary</a>
           <a class="btn" href="mailto:matthewschoolerwells@gmail.com" data-email data-keep-label>Email me</a>
         </div>
+
+        <ul class="metrics" id="metrics"></ul>
 
         <div class="personas" role="group" aria-label="Choose how you want to read this page">
           <p class="personas__label">Read this as</p>
@@ -128,7 +150,7 @@
         <div class="work-grid">
           <div class="cone-panel">
             <div class="cone-wrap">
-              <canvas id="cone" width="880" height="1040" aria-hidden="true"></canvas>
+              <canvas id="cone" width="880" height="1040" tabindex="0" aria-hidden="true"></canvas>
               <p class="cone-status" id="cone-status">All skills</p>
             </div>
             <div class="cone-legend">
@@ -137,7 +159,7 @@
               <span><i class="dot dot--amber"></i>Executive / AI</span>
               <button type="button" class="text-btn" id="cone-reset">Show all skills</button>
             </div>
-            <details class="skill-fallback">
+            <details class="skill-fallback" id="skill-fallback">
               <summary>All skills as a list</summary>
               <ul id="skill-list"></ul>
             </details>
@@ -156,7 +178,7 @@
         </div>
         <div class="hero__actions">
           <a class="btn btn--solid" href="mailto:matthewschoolerwells@gmail.com" data-email data-keep-label>Email me</a>
-          <a class="btn" href="./resume.html" data-packet>Download resume</a>
+          <a class="btn" href="./resume.html" data-packet>View resume</a>
           <a class="btn" href="./executive-summary.html" data-packet>Executive summary</a>
         </div>
         <p class="fineprint">Missouri · © <span id="year">2026</span> Matthew S. Wells</p>
